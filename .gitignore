@@ -1,0 +1,12 @@
+venv/
+banking-api/venv/
+
+__pycache__/
+*.pyc
+
+.env
+.git
+.vscode
+.idea
+
+reports/
