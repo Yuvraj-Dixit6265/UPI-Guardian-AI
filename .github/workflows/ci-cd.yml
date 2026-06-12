@@ -33,6 +33,15 @@ jobs:
           python -c "import sqlalchemy"
           python -c "import redis"
 
+      - name: Verify Kubernetes Manifests Exist
+        run: |
+          test -f kubernetes/deployment.yaml
+          test -f kubernetes/service.yaml
+          test -f kubernetes/configmap.yaml
+          test -f kubernetes/secret.yaml
+          test -f kubernetes/hpa.yaml
+          test -f kubernetes/ingress.yaml
+
       - name: Build Docker Image
         run: |
           docker build -f Dockerfile.prod -t upi-guardian-ai:latest .

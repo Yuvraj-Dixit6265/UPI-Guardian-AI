@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: upi-guardian-app
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: upi-guardian
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+
+  template:
+    metadata:
+      labels:
+        app: upi-guardian
+
+    spec:
+      containers:
+        - name: upi-guardian
+
+          image: upi-guardian-ai:prod
+
+          ports:
+            - containerPort: 8000
+
+          env:
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: upi-guardian-config
+                  key: REDIS_HOST
+
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: upi-guardian-secret
+                  key: DATABASE_URL
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 20
+            periodSeconds: 10
