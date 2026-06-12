@@ -20,10 +20,10 @@ def simulate():
         requests_per_minute=1000
     )
 
-    return result
+    log_event(
+        event_type="FAILOVER",
+        status="SUCCESS",
+        details="Region-A traffic shifted to Region-B"
+    )
 
-log_event(
-    event_type="FAILOVER",
-    status="SUCCESS",
-    details="Region-A traffic shifted to Region-B"
-)
+    return result
