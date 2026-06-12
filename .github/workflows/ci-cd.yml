@@ -44,4 +44,4 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -f Dockerfile.prod -t upi-guardian-ai:latest .
+          docker build -f Dockerfile.prod -t upi-guardian-ai:${{ github.sha }} .
