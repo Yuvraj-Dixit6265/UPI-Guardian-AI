@@ -1,0 +1,15 @@
+venv/
+__pycache__/
+*.pyc
+
+.git
+.gitignore
+
+reports/
+
+.env
+
+.idea
+.vscode
+
+*.db

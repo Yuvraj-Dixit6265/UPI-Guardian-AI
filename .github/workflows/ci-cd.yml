@@ -1,0 +1,38 @@
+name: UPI Guardian AI CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Dependencies
+        run: |
+          pip install -r banking-api/requirements.txt
+
+      - name: Validate Imports
+        run: |
+          python -c "import fastapi"
+          python -c "import sqlalchemy"
+          python -c "import redis"
+
+      - name: Build Docker Image
+        run: |
+          docker build -f Dockerfile.prod -t upi-guardian-ai:latest .
