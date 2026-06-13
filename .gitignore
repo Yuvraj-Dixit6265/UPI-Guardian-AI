@@ -8,5 +8,5 @@ __pycache__/
 .git
 .vscode
 .idea
-
+.DS_Store
 reports/
