@@ -26,7 +26,7 @@ spec:
       containers:
         - name: upi-guardian
 
-          image: upi-guardian-ai:prod
+          image: upi-guardian-ai:v3
           imagePullPolicy: Never
 
           ports:

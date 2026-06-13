@@ -22,6 +22,12 @@ from app.routes.health import router as health_router
 from app.routes.risk import router as risk_router
 from app.routes.disaster_recovery import router as dr_router
 from app.routes.incidents import router as incidents_router
+from app.routes.multi_region import (
+    router as multi_region_router
+)
+from app.routes.ai import (
+    router as ai_router
+)
 
 
 Base.metadata.create_all(bind=engine)
@@ -42,6 +48,10 @@ app.include_router(compliance_router)
 app.include_router(
     compliance_pdf_router
 )
+app.include_router(
+    multi_region_router
+)
+app.include_router(ai_router)
 
 
 @app.get("/")
